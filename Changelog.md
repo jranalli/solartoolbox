@@ -92,3 +92,5 @@ site itself.
 - # Version 0.5.5 - Aug 14, 2026
 - Add tf-based delay option to CMV.
 - Improve repr of Windspeeddata class. 
+- # Version 0.5.6 - Sept 8, 2026
+- Add degree calculation to `cmv` outdata for graph coverage of CMV pairs.

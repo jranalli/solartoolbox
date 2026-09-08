@@ -9,6 +9,7 @@ from scipy.optimize import linear_sum_assignment, shgo
 from scipy.stats import linregress
 
 from enum import Enum
+from collections import Counter
 import itertools
 
 
@@ -348,6 +349,10 @@ def compute_cmv(timeseries, positions, reference_id=None, method="jamaly",
         method_out['r_corr'] = np.abs(r_corr)
         method_out['stderr_corr'] = std_err
         method_out['ngood'] = ngood
+
+        good_pairs = [pair for pair, keep in zip(pairs, pair_flags==Flag.GOOD) if keep]
+        degree = list((Counter(sensor for pair in good_pairs for sensor in pair)).values())
+        method_out['degree_good'] = np.max(degree)/np.sum(degree)
 
     elif method == 'gagne':
         # Function to apply least squares to
